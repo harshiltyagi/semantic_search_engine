@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .search-container {
+            max-width: 800px;
+            width: 100%;
+        }
+        .search-results {
+            padding-top: 20px;
+            background-color: #fff;
+            border: 1px solid #dfe1e5;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .result {
+            padding: 16px;
+            border-bottom: 1px solid #dfe1e5;
+        }
+        .result:last-child {
+            border-bottom: none;
+        }
+        .title {
+            font-size: 18px;
+            color: #1a0dab;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .content-snippet {
+            color: #545454;
+            margin-bottom: 8px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .next-page {
+            padding: 8px 16px;
+            background-color: #1a73e8;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+        .next-page:hover {
+            background-color: #0f6fc6;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <img src="{{ url_for('static', filename='uwinlogo.png') }}" alt="Uwin Logo" class="logo">
+        <h1>Search Results for '{{ query }}' ({{ total_hits }} results)</h1>
+        <div class="search-results">
+            {% for result in results %}
+            <div class="result">
+                <h2 class="title">{{ result.title }}</h2>
+                <p class="content-snippet">{{ result.content_snippet }}...</p>
+                <p>Score: <span class="score">{{ result.score }}</span></p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if next_page %}
+            <a href="#" class="next-page" onclick="document.getElementById('next-page-form').submit(); return false;">Next Page</a>
+            <form id="next-page-form" action="/" method="post" style="display: none;">
+                <input type="hidden" name="query" value="{{ query }}">
+                <input type="hidden" name="year_filter" value="{{ year_filter }}">
+                <input type="hidden" name="keyword_filter" value="{{ keyword_filter }}">
+                <input type="hidden" name="page" value="{{ next_page }}">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

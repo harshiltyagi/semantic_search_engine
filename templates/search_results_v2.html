@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        /* Your existing styles */
+    </style>
+</head>
+<body>
+    <h1>Search Results for '{{ query }}'</h1>
+    <ul>
+        {% for result in results %}
+        <li>
+            <h2>{{ result.title }}</h2>
+            <p>{{ result.content_snippet }}...</p>
+            <p>Score: <span class="score">{{ result.score }}</span></p>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        {% if next_page %}
+        <a href="#" class="next-page" onclick="document.getElementById('next-page-form').submit(); return false;">Next Page</a>
+        <form id="next-page-form" action="/" method="post" style="display: none;">
+            <input type="hidden" name="query" value="{{ query }}">
+            <input type="hidden" name="year_filter" value="{{ year_filter }}">
+            <input type="hidden" name="keyword_filter" value="{{ keyword_filter }}">
+            <input type="hidden" name="page" value="{{ next_page }}">
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

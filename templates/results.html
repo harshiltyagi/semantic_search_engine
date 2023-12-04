@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for '{{ query }}'</h1>
+
+    <!-- Display Suggestions -->
+    {% if suggestions %}
+        <h2>Suggestions:</h2>
+        <ul>
+            {% for suggestion in suggestions %}
+                <li>{{ suggestion['_source']['content'] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No suggestions found.</p>
+    {% endif %}
+</body>
+</html>

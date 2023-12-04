@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            font-size: 16px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background-color: #009688;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            background-color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <img src="{{ url_for('static', filename='uwinlogo.png') }}" alt="Uwin Logo" class="logo">
+        <h1>Semantic Search Engine</h1>
+        <form action="/" method="post">
+            <div class="search-box">
+                <input type="text" class="search-input" name="query" placeholder="Enter your search query">
+                <button type="submit" class="search-button">Search</button>
+            </div>
+            <input type="text" name="year_filter" placeholder="Filter by year">
+            <input type="text" name="keyword_filter" placeholder="Filter by keyword">
+        </form>
+    </div>
+</body>
+</html>

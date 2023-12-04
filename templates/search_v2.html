@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <style>
+        /* Your existing CSS styles */
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#query').on('input', function () {
+                var input = $(this).val().trim();
+                if (input !== '') {
+                    $.ajax({
+                        url: '/suggest',
+                        type: 'GET',
+                        data: {query: input},
+                        success: function (data) {
+                            var suggestions = data.suggestions;
+                            var html = '';
+                            for (var i = 0; i < suggestions.length; i++) {
+                                html += '<option value="' + suggestions[i] + '">';
+                            }
+                            $('#suggestions').html(html);
+                        },
+                        error: function (error) {
+                            console.log('Error fetching suggestions:', error);
+                        }
+                    });
+                } else {
+                    $('#suggestions').html('');
+                }
+            });
+
+            $('#suggestions').change(function () {
+                var selected = $(this).val();
+                $('#query').val(selected);
+                $('#suggestions').html('');
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Search Documents</h1>
+    <form action="/" method="post">
+        <input type="text" id="query" name="query" placeholder="Enter your search query">
+        <datalist id="suggestions"></datalist>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

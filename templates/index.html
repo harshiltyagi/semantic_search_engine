@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semantic Search Engine</title>
+</head>
+<body>
+    <h1>Semantic Search Engine</h1>
+
+    <!-- Suggestions Dropdown -->
+    <form action="/search" method="post">
+        <label for="query">Enter your query or select a suggestion:</label>
+        <input type="text" name="query" id="query" placeholder="Enter your query">
+        <select name="suggestions" id="suggestions">
+            {% if suggestions %}
+                {% for suggestion in suggestions %}
+                    <option value="{{ suggestion['_source']['content'] }}">{{ suggestion['_source']['content'] }}</option>
+                {% endfor %}
+            {% else %}
+                <option>No suggestions available</option>
+            {% endif %}
+        </select>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
