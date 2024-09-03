@@ -32,4 +32,4 @@ The Citeseer Search Engine is designed to efficiently search through academic pa
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/citeseer-search.git
+   git clone https://github.com/harshiltyagi/semantic_search_engine.git
